@@ -33,8 +33,8 @@
 
 1. **Clone** the repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/image-prompt-generator.git
-   cd image-prompt-generator
+   git clone https://github.com/Nagias/exgenpicture.git
+   cd exgenpicture
    ```
 
 2. **Configure API keys:**
