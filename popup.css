@@ -1,0 +1,353 @@
+/* ============================================
+   Image Prompt Generator - Popup Styles
+   "The Kinetic Minimalist" Design System
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 340px;
+  min-height: 400px;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  background: #fcf9f8; /* Base Layer (surface) */
+  color: #5f5f5f; /* default body text - on_surface_variant */
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* using space instead of lines */
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #0054d6, #004abd); /* Primary Electric Blue Gradient */
+  border-radius: 12px; /* lg radius */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 8px 32px rgba(50, 50, 50, 0.06); /* Ambient depth */
+}
+
+h1 {
+  font-size: 1.125rem; /* title-md */
+  font-weight: 600; /* Headline-sm weight logic */
+  color: #323232; /* on_surface for headlines */
+  letter-spacing: -0.2px;
+}
+
+.subtitle {
+  font-size: 0.75rem; /* label-md size */
+  color: #5f5f5f;
+  margin-top: 2px;
+}
+
+/* ─── Tonal Sections (No Borders) ─── */
+.section {
+  background: #f3efed; /* Secondary Content (surface-container-low) */
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* NO BORDERS */
+}
+
+.section-title {
+  font-size: 0.875rem; /* body-md size but used as section header */
+  font-weight: 600;
+  color: #323232;
+  letter-spacing: 0.2px;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #5f5f5f;
+}
+
+/* ─── Steps ─── */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* ample vertical spacing */
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: #5f5f5f;
+}
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  background: linear-gradient(135deg, #0054d6, #004abd);
+  border-radius: 8px; /* md radius */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(50, 50, 50, 0.04);
+}
+
+.step strong {
+  color: #323232;
+  font-weight: 600;
+}
+
+/* ─── Stats ─── */
+.stats-section {
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px 16px;
+  background: #ffffff; /* Interactive element BG to pop out */
+  box-shadow: 0 8px 32px rgba(50, 50, 50, 0.04);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-value {
+  font-size: 2.25rem; /* display-sm */
+  font-weight: 700;
+  background: linear-gradient(135deg, #0054d6, #004abd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #5f5f5f;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* ─── Buttons ─── */
+.btn {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px; /* md */
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0054d6, #004abd);
+  color: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 84, 214, 0.15); /* Ambient depth with primary tint */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 84, 214, 0.25);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #5f5f5f;
+  box-shadow: 0 4px 16px rgba(50, 50, 50, 0.04);
+}
+
+.btn-secondary:hover {
+  background: #fdfdfd;
+  color: #d32f2f; /* Red on hover to indicate destructive action for clear cache */
+  box-shadow: 0 8px 24px rgba(211, 47, 47, 0.08);
+}
+
+/* ─── Footer ─── */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #a0a0a0;
+  padding-top: 8px;
+}
+
+/* ─── API Settings ─── */
+.section-desc {
+  font-size: 0.75rem;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.api-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.api-select {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(50,50,50,0.12);
+  background: #fff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.8rem;
+  color: #323232;
+  outline: none;
+  cursor: pointer;
+}
+.api-select:focus {
+  border-color: #0054d6;
+}
+
+.api-input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.api-input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(50,50,50,0.12);
+  background: #fff;
+  font-family: 'Be Vietnam Pro', monospace;
+  font-size: 0.75rem;
+  color: #323232;
+  outline: none;
+}
+.api-input:focus {
+  border-color: #0054d6;
+}
+.api-input::placeholder {
+  color: #bbb;
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border: none;
+  background: linear-gradient(135deg, #0054d6, #004abd);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+.btn-icon:hover {
+  transform: scale(1.05);
+}
+
+.saved-keys {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.saved-key-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.key-provider {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.key-provider.gemini { background: #e8f0fe; color: #1a73e8; }
+.key-provider.openai { background: #e8f5e9; color: #2e7d32; }
+.key-provider.claude { background: #fff3e0; color: #e65100; }
+
+.key-value {
+  flex: 1;
+  font-family: monospace;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.key-delete {
+  border: none;
+  background: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 2px;
+}
+.key-delete:hover {
+  color: #d32f2f;
+}
+
+
+/* ─── Toast ─── */
+.popup-toast {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #323232;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+.popup-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

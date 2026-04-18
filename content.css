@@ -1,0 +1,8 @@
+/* ============================================
+   Image Prompt Generator - Content Script Styles
+   Injected via Shadow DOM to avoid page conflicts
+   ============================================ */
+
+/* These styles are applied inside Shadow DOM - 
+   see content.js for Shadow DOM setup.
+   This file is loaded as a reference and injected as text. */

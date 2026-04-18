@@ -1,0 +1,19 @@
+# Private config (contains API keys)
+config.js
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Misc
+*.zip
+*.crx
+*.pem

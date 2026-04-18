@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Prompt Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+        </div>
+        <div>
+          <h1>Image Prompt Gen</h1>
+          <p class="subtitle">AI-powered image analysis</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Settings — TOP -->
+    <div class="section">
+      <h2 class="section-title">🔑 API Keys</h2>
+      <p class="section-desc">Thêm API key của bạn để dùng Extension</p>
+      <div class="api-form">
+        <select id="apiProvider" class="api-select">
+          <option value="gemini">Google Gemini</option>
+          <option value="openai">OpenAI (GPT-4o)</option>
+          <option value="claude">Anthropic Claude</option>
+        </select>
+        <div class="api-input-row">
+          <input type="password" id="apiKeyInput" class="api-input" placeholder="Paste API key here..." />
+          <button id="saveApiKey" class="btn-icon" title="Save">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div id="savedKeysList" class="saved-keys"></div>
+    </div>
+
+    <div class="section stats-section">
+      <div class="stat">
+        <span class="stat-value" id="totalAnalyzed">0</span>
+        <span class="stat-label">Analyzed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="cacheSize">0</span>
+        <span class="stat-label">Cached</span>
+      </div>
+    </div>
+
+    <!-- Gallery opens in new window -->
+    <button id="openGallery" class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208V168.69l-37.65-37.66a16,16,0,0,0-22.62,0L107.31,171.4,85.66,149.74a16,16,0,0,0-22.62,0L48,164.69Zm0,160V188l26.34-26.35,21.66,21.66a16,16,0,0,0,22.62,0L159,143l49,49v16Zm96-112a12,12,0,1,1,12,12A12,12,0,0,1,144,96Z"/></svg>
+      📦 Image Library (<span id="galleryCount">0</span>)
+    </button>
+
+    <div class="section">
+      <h2 class="section-title">Cách sử dụng</h2>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><span>Hover chuột lên ảnh bất kỳ</span></div>
+        <div class="step"><span class="step-num">2</span><span>Click icon ✦ xuất hiện</span></div>
+        <div class="step"><span class="step-num">3</span><span>Chọn <strong>JSON</strong>, <strong>EN</strong>, <strong>VI</strong> hoặc <strong>CN</strong></span></div>
+        <div class="step"><span class="step-num">4</span><span>Paste vào Gemini / Flow để tạo ảnh!</span></div>
+      </div>
+    </div>
+
+    <button id="clearCache" class="btn btn-secondary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"/></svg>
+      Clear All Cache
+    </button>
+
+    <div class="footer">
+      <span>v1.2.0</span>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
