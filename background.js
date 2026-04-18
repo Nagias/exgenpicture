@@ -359,6 +359,54 @@ async function callClaude(promptText, base64Image, mimeType, apiKey) {
 }
 
 // ═══════════════════════════════════════════════════
+// Custom OpenAI-Compatible Provider (9router, LiteLLM, OpenRouter, etc.)
+// ═══════════════════════════════════════════════════
+async function callCustomOpenAI(promptText, base64Image, mimeType, apiKey, baseUrl, model) {
+  console.log(`[IPG] 🟣 Using Custom Provider: ${model} @ ${baseUrl}`);
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 60000); // longer timeout for proxies
+
+  // Build message content — with or without image
+  const content = [];
+  if (base64Image) {
+    content.push({ type: 'image_url', image_url: { url: `data:${mimeType};base64,${base64Image}` } });
+  }
+  content.push({ type: 'text', text: promptText });
+
+  // Normalize base URL (ensure no trailing slash)
+  const url = baseUrl.replace(/\/+$/, '') + '/chat/completions';
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: model,
+      messages: [{ role: 'user', content }],
+      max_tokens: 4096,
+      temperature: 0.3
+    }),
+    signal: controller.signal
+  });
+  clearTimeout(timeoutId);
+
+  if (!response.ok) {
+    const err = await response.text().catch(() => '');
+    throw new Error(`Custom(${model}) ${response.status}: ${err.substring(0, 100)}`);
+  }
+
+  const data = await response.json();
+  const text = data.choices?.[0]?.message?.content;
+  if (!text) throw new Error('Empty custom provider response');
+
+  // Convert to Gemini-like format
+  return { candidates: [{ content: { parts: [{ text }] } }] };
+}
+
+// ═══════════════════════════════════════════════════
 // Unified API Caller — tries user keys first, then built-in
 // ═══════════════════════════════════════════════════
 async function callAPI(geminiRequestBody) {
@@ -380,6 +428,8 @@ async function callAPI(geminiRequestBody) {
         return await callOpenAI(promptText, base64, mimeType, userKey.key);
       } else if (userKey.provider === 'claude') {
         return await callClaude(promptText, base64, mimeType, userKey.key);
+      } else if (userKey.provider === 'custom') {
+        return await callCustomOpenAI(promptText, base64, mimeType, userKey.key, userKey.baseUrl, userKey.model);
       }
     } catch (err) {
       console.warn(`[IPG] ⚠️ User ${userKey.provider} key failed: ${err.message}`);

@@ -10,6 +10,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const apiKeyInput = document.getElementById('apiKeyInput');
   const saveApiKeyBtn = document.getElementById('saveApiKey');
   const savedKeysList = document.getElementById('savedKeysList');
+  const customFields = document.getElementById('customFields');
+  const customBaseUrl = document.getElementById('customBaseUrl');
+  const customModel = document.getElementById('customModel');
+
+  // Toggle custom fields visibility
+  providerSelect.addEventListener('change', () => {
+    customFields.style.display = providerSelect.value === 'custom' ? '' : 'none';
+  });
 
   await updateStats();
   await loadSavedKeys();
@@ -38,6 +46,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    // Validate custom provider fields
+    if (provider === 'custom') {
+      const baseUrl = customBaseUrl.value.trim();
+      const model = customModel.value.trim();
+      if (!baseUrl || !model) {
+        showPopupToast('Please fill Base URL and Model name');
+        return;
+      }
+    }
+
     const stored = await chrome.storage.local.get(['ipg_user_keys']);
     const userKeys = stored.ipg_user_keys || [];
 
@@ -47,13 +65,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    userKeys.push({ provider, key, addedAt: Date.now() });
+    const entry = { provider, key, addedAt: Date.now() };
+    if (provider === 'custom') {
+      entry.baseUrl = customBaseUrl.value.trim();
+      entry.model = customModel.value.trim();
+    }
+
+    userKeys.push(entry);
     await chrome.storage.local.set({ ipg_user_keys: userKeys });
 
     try { chrome.runtime.sendMessage({ type: 'RELOAD_KEYS' }); } catch (e) { }
 
     apiKeyInput.value = '';
-    showPopupToast(`${provider.toUpperCase()} key saved!`);
+    if (provider === 'custom') {
+      customBaseUrl.value = '';
+      customModel.value = '';
+    }
+    showPopupToast(`${provider === 'custom' ? 'Custom provider' : provider.toUpperCase()} key saved!`);
     await loadSavedKeys();
   });
 
@@ -72,8 +100,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         ? item.key.substring(0, 4) + '••••••••' + item.key.slice(-4)
         : '••••••••';
 
+      const label = item.provider === 'custom'
+        ? `custom: ${item.model || 'unknown'}`
+        : item.provider;
+
       el.innerHTML = `
-        <span class="key-provider ${item.provider}">${item.provider}</span>
+        <span class="key-provider ${item.provider}">${label}</span>
         <span class="key-value">${masked}</span>
         <button class="key-delete" data-index="${index}" title="Remove">✕</button>
       `;

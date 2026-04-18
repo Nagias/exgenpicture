@@ -32,7 +32,12 @@
           <option value="gemini">Google Gemini</option>
           <option value="openai">OpenAI (GPT-4o)</option>
           <option value="claude">Anthropic Claude</option>
+          <option value="custom">Custom (OpenAI-compatible)</option>
         </select>
+        <div id="customFields" class="custom-fields" style="display:none;">
+          <input type="text" id="customBaseUrl" class="api-input" placeholder="Base URL (e.g. http://127.0.0.1:20128/v1)" />
+          <input type="text" id="customModel" class="api-input" placeholder="Model name (e.g. OpenClaw)" />
+        </div>
         <div class="api-input-row">
           <input type="password" id="apiKeyInput" class="api-input" placeholder="Paste API key here..." />
           <button id="saveApiKey" class="btn-icon" title="Save">
